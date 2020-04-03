@@ -5,17 +5,16 @@ ini_set('display_errors', true);
 
 function getData(){
 
-require_once __DIR__.'/SimpleXLSX.php';
+    require_once __DIR__.'/SimpleXLSX.php';
 
-if ( $xlsx = SimpleXLSX::parse('fusioncharts-poc.xlsx') ) {
-	// print_r( $xlsx->rows() );
+    if ( $xlsx = SimpleXLSX::parse('fusioncharts-poc.xlsx') ) {
 
-	foreach($xlsx->rows() as $x){
-		if(!empty($x[1])){
-            $all[] = $x;
-            $agency[] = $x[1];
-		}
-	}
+      foreach($xlsx->rows() as $x){
+        if(!empty($x[1])){
+                $all[] = $x;
+                $agency[] = $x[1];
+        }
+      }
 
     } else {
         echo SimpleXLSX::parseError();
@@ -50,19 +49,7 @@ if ( $xlsx = SimpleXLSX::parse('fusioncharts-poc.xlsx') ) {
 }
 
 
-print 'const chartData = [';
-
-// print '
-//         {id: "Agency",parent: "",label: "Agency",value: ""},
-//         {id: "Armed Forces Retirement Home Trust Fund",parent: "Agency",label: "Armed Forces Retirement Home Trust Fund",value: "0"},
-//         {id: "General Fund: $2,800,000 (until 9/30/2021)",parent: "Armed Forces Retirement Home Trust Fund",label: "General Fund: $2,800,000 (until 9/30/2021)",value: "2800000"},
-//         {id:"International Disaster Assistance: $258,000,000 (until expended)",parent: "Armed Forces Retirement Home Trust Fund",label:"International Disaster Assistance: $258,000,000 (until expended)",value: "258000000"},
-//       ];
-// ';
-
-print getData();
-
-print '];';
+print 'const chartData = [' . getData() . '];';
 
 print '
       const chartConfig = {
